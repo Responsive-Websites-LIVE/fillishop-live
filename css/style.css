@@ -642,7 +642,7 @@ h6 {
   position: absolute;
   bottom: -1px;
   left: 50%;
-  width: 100vw;
+  width: 200vw;
   height: 1px;
   background-color: #4e4e4e;
   -webkit-transform: translate(-50%, 0px);
@@ -1171,7 +1171,7 @@ h6 {
 
   .main-middle-header {
     gap: calc(
-        34px + 8 * ((100vw - 991px) / 359)
+        26px + 16 * ((100vw - 991px) / 359)
       );
   }
 
@@ -1184,7 +1184,7 @@ h6 {
 
 @media (max-width: 991px) {
   .main-middle-header {
-    gap: 34px;
+    gap: 26px;
   }
 }
 
@@ -1443,6 +1443,14 @@ h6 {
     -webkit-box-flex: 1;
         -ms-flex: 1 1 auto;
             flex: 1 1 auto;
+  }
+}
+
+@media (max-width: 23.75rem) {
+  .main-middle-header__logo {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 5.625rem;
+            flex: 0 0 5.625rem;
   }
 }
 
