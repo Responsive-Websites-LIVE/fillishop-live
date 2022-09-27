@@ -56,6 +56,7 @@
             if (bodyLockStatus && e.target.closest(".icon-menu")) {
                 bodyLockToggle();
                 document.documentElement.classList.toggle("menu-open");
+                if (document.querySelector(".bottom-header__inner").classList.contains("open-items")) document.querySelector(".bottom-header__inner").classList.remove("open-items");
             }
         }));
     }
@@ -176,6 +177,36 @@
         }));
     }
     searchInit();
+    function bottomContentShowInit() {
+        if (document.querySelector(".header__bottom-menu")) {
+            let buttonsContent = document.querySelectorAll(".bottom-header__item");
+            let itemsContent = document.querySelectorAll(".bottom-menu__item");
+            if (buttonsContent && itemsContent) document.addEventListener("click", (e => {
+                let dataContentValue = e.target.dataset.content;
+                if (e.target.closest(".bottom-header__item")) itemsContent.forEach((item => {
+                    item.dataset.content == dataContentValue ? item.classList.toggle("open-item") : item.classList.remove("open-item");
+                })); else if (!e.target.closest(".bottom-header__item") && !e.target.closest(".bottom-menu__item")) itemsContent.forEach((item => {
+                    if (item.classList.contains("open-item")) item.classList.remove("open-item");
+                })); else if (e.target.closest(".bottom-menu__back")) itemsContent.forEach((item => {
+                    if (item.classList.contains("open-item")) item.classList.remove("open-item");
+                }));
+            }));
+        }
+    }
+    bottomContentShowInit();
+    document.querySelector(".menu__catalog-button").addEventListener("click", (function(e) {
+        document.querySelector(".bottom-header__inner").classList.add("open-items");
+        document.documentElement.classList.add("lock");
+    }));
+    window.addEventListener("resize", (function(e) {
+        let itemsContent = document.querySelectorAll(".bottom-menu__item");
+        if (window.innerWidth <= 991) itemsContent.forEach((item => {
+            item.classList.remove("open-item");
+        }));
+    }));
+    document.addEventListener("click", (function(e) {
+        if (e.target.closest(".bottom-header__back") && document.querySelector(".bottom-header__inner").classList.contains("open-items")) document.querySelector(".bottom-header__inner").classList.remove("open-items");
+    }));
     window["FLS"] = true;
     isWebp();
     menuInit();
